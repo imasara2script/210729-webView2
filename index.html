@@ -1,0 +1,51 @@
+<html>
+<title>test</title>
+<body>
+	path<input id=inpPath value="c:/wpf/test.txt"><br>
+	<textarea id=ta style="width:100%;height:100px" wrap=off></textarea>
+	<button id=btn>Write</button>
+</body>
+<script src="付属品\WPF.js"></script>
+<script src="付属品\dropキャンセラー.js"></script>
+<script src="付属品\ウィンドウ.js"></script>
+<script src="付属品\シェル.js"></script>
+<script src="付属品\テキストファイル.js"></script>
+<script>
+	onload = () => {
+		WPF.send('icon','C:/WPF/付属品/icon.ico')
+		WPF.send('Title', 'hta+')
+	}
+	
+	btn.onclick = async ()=> {
+		// テキストファイル.Write(inpPath.value, ta.value)
+		// confirm( await テキストファイル.Read('C:/wpf/付属品/test.txt') )
+		// シェル.実行('cmd', '/C dir /S C:\\').then(v => {ta.value = v})
+		// シェル.実行('cscript', 'C:/WPF/5sec.js').then(v => {ta.value = v})
+		// シェル.実行('cmd', '/C dir C:\\').then(v => {ta.value = v})
+		// ta.value = await シェル.実行('cmd', '/C dir C:\\', true)
+		ta.value = ''
+		// シェル.実行('cmd', '/C dir C:\\').then(v => {
+		// 	ta.value += v + '\r\n---------------------\r\n'})
+		ta.value = await シェル.実行('cmd', '/C dir C:\\')
+	}
+	
+	
+	/*
+	onresize = ()=> {
+		inpWidth.value  = window.outerWidth
+		inpHeight.value = window.outerHeight
+	}
+	onclick = async ()=> {
+		inpTop .value = await ウィンドウ.top .get()
+		inpLeft.value = await ウィンドウ.left.get()
+		WPF.send('getTop' , (v)=>{ inpTop .value = v })
+		WPF.send('getLeft', (v)=>{ inpLeft.value = v })
+		WPF.sendPromise('TextRead=C:/wpf/test.txt').then((v)=>{ confirm(v) })
+	}
+	inpTop.onchange = 
+		function(){
+			ウィンドウ[this.id.replace(/^inp/,'').toLowerCase()].set(this.value)
+		}
+	*/
+</script>
+</html>
